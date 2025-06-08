@@ -1,0 +1,14 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: jdbc:sqlserver://<your-server>.database.windows.net:1433;database=<your-db>
+    username: <your-username>
+    password: <your-password>
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
