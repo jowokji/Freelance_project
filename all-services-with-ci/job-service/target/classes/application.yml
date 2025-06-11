@@ -1,14 +1,41 @@
 server:
-  port: 8080
+  port: 8082
 
 spring:
   application:
     name: job-service
+
   datasource:
-    url: jdbc:sqlserver://<your-server>.database.windows.net:1433;database=<your-db>
-    username: <your-username>
-    password: <your-password>
+    url: jdbc:postgresql://freelance.postgres.database.azure.com:5432/jobdb?sslmode=require
+    username: postgre
+    password: wokilox2-
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: job-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  cache:
+    type: simple
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  simple:
+    metrics:
+      export:
+        enabled: true

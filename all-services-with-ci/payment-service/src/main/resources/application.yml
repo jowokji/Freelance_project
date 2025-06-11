@@ -1,14 +1,17 @@
 server:
-  port: 8081
+  port: 8083
 
 spring:
   application:
     name: payment-service
-  datasource:
-    url: jdbc:sqlserver://<your-server>.database.windows.net:1433;database=<your-db>
-    username: <your-username>
-    password: <your-password>
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: payment-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

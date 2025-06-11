@@ -1,16 +1,25 @@
 package com.example.jobservice.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.jobservice.Job;
+import com.example.jobservice.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/jobs")
 public class JobController {
+    @Autowired
+    private JobService service;
 
     @GetMapping
-    public List<String> getJobs() {
-        return List.of("Backend Developer", "Frontend Developer");
+    public List<Job> getJobs() {
+        return service.getAllJobs();
+    }
+
+    @PostMapping
+    public Job create(@RequestBody Job job) {
+        return service.create(job);
     }
 }
