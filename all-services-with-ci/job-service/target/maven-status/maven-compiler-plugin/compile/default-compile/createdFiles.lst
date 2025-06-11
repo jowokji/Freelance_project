@@ -1,0 +1,4 @@
+com\example\jobservice\JobRepository.class
+com\example\jobservice\Job.class
+com\example\jobservice\controller\JobController.class
+com\example\jobservice\JobService.class
